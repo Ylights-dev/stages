@@ -1,10 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/mitchellh/mapstructure"
+)
 
 type point struct {
-	X int
-	Y int
+	X int `mapstructure:"xx" `
+	Y int `mapstructure:"yy"`
 }
 
 func (p point) method() {
@@ -13,10 +17,13 @@ func (p point) method() {
 
 func main() {
 	pointMap := map[string]int{
-		"x": 1, //продублировали имя полей структуры
-		"y": 2,
+		"xx": 1, //продублировали имя полей структуры
+		"yy": 2,
 	}
 
+	p1 := point{}
+	mapstructure.Decode(pointMap, &p1)
+	fmt.Println(p1)
 }
 
 // otherPointMap := make(map[int]point)
@@ -27,7 +34,7 @@ func main() {
 // }
 //fmt.Println(pointMap)
 // // fmt.Println(pointMap["a"])
-otherPointMap[1] = point{Y: 1, X: 2}
+//otherPointMap[1] = point{Y: 1, X: 2}
 // // fmt.Println(otherPointMap)
 // // fmt.Println(otherPointMap[1])
 
